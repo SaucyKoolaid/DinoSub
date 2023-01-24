@@ -9,43 +9,28 @@
 </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-<body> <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">WebSiteName</a>
-      </div>
-    </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-          <h3>Column 1</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Column 2</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-        </div>
-    </div>
-  </div>
-</body>
-This is just a basic example, Bootstrap has many more classes and elements you can use to customize the template and make it look exactly the way you want.
-
-You can also use other frameworks like Foundation, Bulma, TailwindCSS or even use pre-made templates from websites such as HTML5 UP, W3 Layouts, etc.
-
-
-
-
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+p {
+		font-size: 2.5em
+	}
+h1 {
+		font-size: 4em
+	}
  
 </style>
 </head>
 <body>
-<h1></h1>
-<p>Dino Sub</p>
-<p>A Game where everyones is a winner Win</p>
-  <p>By Asu, Kyle And Brook <p>
-  <p> Instructions </p> You should use the up and down Arrow to swich dementions and space to jump  
+  <img src = https://m.media-amazon.com/images/I/71AcuiDESvL.png width = 450em class="center">
+<h1 style="text-align:center;">Dino Sub</h1>
+<p style="text-align:center;">A Game where <em>everyone</em> is a winner</p>
+  <p style="text-align:center;">By Asu, Kyle And Brook <p>
+  <p style="text-align:center;"> Instructions 
+  <p style="text-align:center;"> Use the up and down arrows to swich dimensions and space to jump  
 </body>
 </html>
 
