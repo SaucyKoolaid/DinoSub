@@ -1,0 +1,31 @@
+const baseY = 400;
+var dinoY = 400
+var jumpDebounce = false;
+
+function setup() {
+	createCanvas(1000,500);
+	background(100);
+	rectMode(CENTER);
+}
+
+function draw() {
+	clear();
+	dinoSprite(150,dinoY)
+}
+
+function dinoSprite(x,y){
+	fill(127.5);
+	rect(x-20,y+10,20,10); //tail
+	rect(x,y,40,40); //torso
+	rect(x+30,y-30,40,40); //head
+	rect(x-15,y+25,10,15);
+	rect(x,y+25,10,15);
+	rect(x+25,y,15,10);
+	fill(255);
+	rect(x+35,y-30,10,10)
+}
+
+function keyPressed(){
+	if(key=="w"&&jumpDebounce==false){
+	}
+}
