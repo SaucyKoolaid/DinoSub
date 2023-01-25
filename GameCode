@@ -2,6 +2,7 @@ const baseY = 400;
 var dinoY = 400
 var jumpDebounce = false;
 var jumpStage = 0
+var dimensionID = 1
 
 class dimension {
 		constructor(ID,obstacles,active){    // ID: 0 - blue, 1 - green, 2 - red
@@ -31,10 +32,22 @@ function setup() {
 }
 
 function draw() {
-	clear();
+	clear()
+	//dimension changing along with dimension id
+	if(dimensionID==0){
+		fill(0,0,255)
+	}if(dimensionID==1){
+		fill(0,255,0)
+	}if(dimensionID==2){
+		fill(255,0,0)
+	}
+	rect(500,250,1000,1000);
+	
+	//draw sprites and test sprites
 	dinoSprite(150,dinoY)
 	meteorSprite(500,250)
 	
+	//dino jump
 	if(jumpDebounce){
 		jumpStage+=1
 		if(jumpStage<=25){
@@ -63,7 +76,7 @@ function dinoSprite(x,y){
 }
 
 function meteorSprite(x,y){
-	fill(255,127.5,0)
+	fill(255,127.5,0)                                                 
 	stroke(255,127.5,0)
 	circle(x,y,65)
 	rect(x+40,y,75,50)
@@ -75,5 +88,11 @@ function meteorSprite(x,y){
 function keyPressed(){
 	if(key=="w"&&jumpDebounce==false){
 		jumpDebounce = true;
+	}
+	if(key=="a"&&dimensionID>0){
+		dimensionID-=1
+	}
+	if(key=="d"&&dimensionID<2){
+		dimensionID+=1
 	}
 }
