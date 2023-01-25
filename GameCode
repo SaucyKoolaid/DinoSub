@@ -3,6 +3,27 @@ var dinoY = 400
 var jumpDebounce = false;
 var jumpStage = 0
 
+class dimension {
+		constructor(ID,obstacles,active){    // ID: 0 - blue, 1 - green, 2 - red
+			this.id = ID;
+			this.obstacles = obstacles;
+			this.active = active
+	}                                      
+}
+
+class obstacle {
+	constructor(xPos,yPos,type,dimension){
+		this.x = xPos
+		this.y = yPos
+		this.type = type // 0 - meteor
+		this.dimension = dimension // 0 - blue, 1 - green, 2 - red
+	}
+}
+
+var blueDimension = new dimension(0,[],false)
+var greenDimension = new dimension(1,[],true)
+var redDimension = new dimension(2,[],false)
+
 function setup() {
 	createCanvas(1000,500);
 	background(100);
@@ -12,6 +33,7 @@ function setup() {
 function draw() {
 	clear();
 	dinoSprite(150,dinoY)
+	meteorSprite(500,250)
 	
 	if(jumpDebounce){
 		jumpStage+=1
@@ -28,6 +50,7 @@ function draw() {
 }
 
 function dinoSprite(x,y){
+	stroke(0)
 	fill(127.5);
 	rect(x-20,y+10,20,10); //tail
 	rect(x,y,40,40); //torso
@@ -37,6 +60,16 @@ function dinoSprite(x,y){
 	rect(x+25,y,15,10);
 	fill(255);
 	rect(x+35,y-30,10,10)
+}
+
+function meteorSprite(x,y){
+	fill(255,127.5,0)
+	stroke(255,127.5,0)
+	circle(x,y,65)
+	rect(x+40,y,75,50)
+	rect(x+75,y,75,30)
+	fill(50,0,0);
+	circle(x,y,50)
 }
 
 function keyPressed(){
