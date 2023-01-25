@@ -1,6 +1,7 @@
 const baseY = 400;
 var dinoY = 400
 var jumpDebounce = false;
+var jumpStage = 0
 
 function setup() {
 	createCanvas(1000,500);
@@ -11,6 +12,19 @@ function setup() {
 function draw() {
 	clear();
 	dinoSprite(150,dinoY)
+	
+	if(jumpDebounce){
+		jumpStage+=1
+		if(jumpStage<=25){
+			dinoY-=5
+		}else{
+			dinoY+=5
+		}
+		if(jumpStage==50){
+			jumpDebounce=false
+			jumpStage=0;
+		}
+	}
 }
 
 function dinoSprite(x,y){
@@ -27,5 +41,6 @@ function dinoSprite(x,y){
 
 function keyPressed(){
 	if(key=="w"&&jumpDebounce==false){
+		jumpDebounce = true;
 	}
 }
