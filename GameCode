@@ -1,29 +1,33 @@
+var score = 0
+var dead = false
+
+var spawnObstacleMajor = 0
+
 const baseY = 400;
 var dinoY = 400
 var jumpDebounce = false;
 var jumpStage = 0
 var dimensionID = 1
 
-class dimension {
-		constructor(ID,obstacles,active){    // ID: 0 - blue, 1 - green, 2 - red
-			this.id = ID;
-			this.obstacles = obstacles;
-			this.active = active
-	}                                      
-}
-
 class obstacle {
-	constructor(xPos,yPos,type,dimension){
+	constructor(xPos,dimension){
 		this.x = xPos
-		this.y = yPos
-		this.type = type // 0 - meteor
 		this.dimension = dimension // 0 - blue, 1 - green, 2 - red
 	}
 }
 
-var blueDimension = new dimension(0,[],false)
-var greenDimension = new dimension(1,[],true)
-var redDimension = new dimension(2,[],false)
+var m1 = new obstacle()
+m1.x=1000
+m1.dimension = Math.floor(random(0,3))
+var m2 = new obstacle()
+m1.x=9563
+m1.dimension = Math.floor(random(0,3))
+var m3 = new obstacle()
+m1.x=24267
+m1.dimension = Math.floor(random(0,3))
+console.log(m1.dimension)
+
+var obstacles = [m1,m2,m3]
 
 function setup() {
 	createCanvas(1000,500);
@@ -33,6 +37,8 @@ function setup() {
 
 function draw() {
 	clear()
+	score+=1 //up score
+	
 	//dimension changing along with dimension id
 	if(dimensionID==0){
 		fill(0,0,255)
@@ -45,7 +51,7 @@ function draw() {
 	
 	//draw sprites and test sprites
 	dinoSprite(150,dinoY)
-	meteorSprite(500,250)
+	meteorSprite(500,400)
 	
 	//dino jump
 	if(jumpDebounce){
@@ -59,6 +65,11 @@ function draw() {
 			jumpDebounce=false
 			jumpStage=0;
 		}
+	}
+	
+	//allow meteors to glide
+	for(let i=0; i<3; i++){
+		obstacles[i].x+=1
 	}
 }
 
@@ -84,6 +95,23 @@ function meteorSprite(x,y){
 	fill(50,0,0);
 	circle(x,y,50)
 }
+function blueMeteorSprite(x,y){
+	fill(0,0,255)                                                 
+	stroke(0,0,255)
+	circle(x,y,65)
+	rect(x+40,y,75,50)
+	rect(x+75,y,75,30)
+	circle(x,y,50)
+}
+function greenMeteorSprite(x,y){
+	fill(0,0,255)                                                 
+	stroke(0,0,255)
+	circle(x,y,65)
+	rect(x+40,y,75,50)
+	rect(x+75,y,75,30)
+	circle(x,y,50)
+}
+
 
 function keyPressed(){
 	if(key=="w"&&jumpDebounce==false){
