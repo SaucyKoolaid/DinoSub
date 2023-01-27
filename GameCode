@@ -1,3 +1,4 @@
+var stage = 1
 var score = 0
 var dead = false
 
@@ -6,6 +7,7 @@ var m1x = 1000
 var m2x = 4456
 var m3x = 9827
 var m1d,m2d,m3d
+var meteorSpeed = 5
 
 
 const baseY = 400;
@@ -27,6 +29,7 @@ function draw() {
 	clear()
 	score+=1 //up score
 	
+	
 	//dimension changing along with dimension id
 	if(dimensionID==0){
 		fill(0,0,255)
@@ -41,7 +44,7 @@ function draw() {
 	
 	if(m1d == dimensionID){
 		meteorSprite(m1x,400)
-	}else{
+	}if(m1d!=dimensionID){
 		if(m1d==0){
 			blueMeteorSprite(m1x,400)
 		}
@@ -52,9 +55,33 @@ function draw() {
 			redMeteorSprite(m1x,400)
 		}
 	}
+	if(m2d == dimensionID){
+		meteorSprite(m2x,400)
+	}if(m2d!=dimensionID){
+		if(m2d==0){
+			blueMeteorSprite(m2x,400)
+		}
+		if(m2d==1){
+			greenMeteorSprite(m2x,400)
+		}
+		if(m2d==2){
+			redMeteorSprite(m2x,400)
+		}
+	}
+	if(m3d == dimensionID){
+		meteorSprite(m3x,400)
+	}if(m3d!=dimensionID){
+		if(m3d==0){
+			blueMeteorSprite(m3x,400)
+		}
+		if(m3d==1){
+			greenMeteorSprite(m3x,400)
+		}
+		if(m3d==2){
+			redMeteorSprite(m3x,400)
+		}
+	}
 	
-	meteorSprite(m2x,400)
-	meteorSprite(m3x,400)
 	dinoSprite(150,dinoY)
 	
 	//dino jump
@@ -72,12 +99,59 @@ function draw() {
 	}
 	
 	//allow meteors to glide
-	m1x-=5
-	m2x-=5
-	m3x-=5
+	m1x-=meteorSpeed
+	m2x-=meteorSpeed
+	m3x-=meteorSpeed
+	
+	//meteors respawn at right side of screen
+	
+	if(m1x<=0){
+		m1x=1000
+		m1d = Math.floor(random(0,3))
+	}	if(m2x<=0){
+		m2x=1000
+		m2d = Math.floor(random(0,3))
+	} if(m3x<=0){
+		m3x=1000
+		m3d = Math.floor(random(0,3))
+	}
+	
+	// normal meteors kill dino
+	if(m1d==dimensionID){
+		if(m1x<175&&m1x>125){
+			if(dinoY<425&&dinoY>375){
+				stage=2
+				console.log(stage)
+			}
+		}
+	}
+	if(m2d==dimensionID){
+		if(m2x<175&&m2x>125){
+			if(dinoY<425&&dinoY>375){
+				stage=2
+				console.log(stage)
+			}
+		}
+	}
+	if(m3d==dimensionID){
+		if(m3x<175&&m3x>125){
+			if(dinoY<425&&dinoY>375){
+				stage=2
+				console.log(stage)
+			}
+		}
+	}
+	
+	
+	
+	//displayScore
+	fill(0)
+	textSize(25)
+	text(score,100,100)
+	
 }
 
-function dinoSprite(x,y){
+function dinoSprite(x,y){ //150, dinoY
 	stroke(0)
 	fill(127.5);
 	rect(x-20,y+10,20,10); //tail
