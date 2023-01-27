@@ -1,6 +1,5 @@
-var stage = 1
+var stage = 0
 var score = 0
-var dead = false
 
 
 var m1x = 1000
@@ -8,6 +7,7 @@ var m2x = 4456
 var m3x = 9827
 var m1d,m2d,m3d
 var meteorSpeed = 5
+var meteorMajor = 1
 
 
 const baseY = 400;
@@ -27,128 +27,153 @@ function setup() {
 
 function draw() {
 	clear()
-	score+=1 //up score
-	
-	
-	//dimension changing along with dimension id
-	if(dimensionID==0){
-		fill(0,0,255)
-	}if(dimensionID==1){
-		fill(0,255,0)
-	}if(dimensionID==2){
-		fill(255,0,0)
-	}
-	rect(500,250,1000,1000);
-	
-	//draw sprites and test sprites
-	
-	if(m1d == dimensionID){
-		meteorSprite(m1x,400)
-	}if(m1d!=dimensionID){
-		if(m1d==0){
-			blueMeteorSprite(m1x,400)
+	if(stage==1){
+		score+=1 //up score
+
+
+		//dimension changing along with dimension id
+		if(dimensionID==0){
+			fill(0,0,255)
+		}if(dimensionID==1){
+			fill(0,255,0)
+		}if(dimensionID==2){
+			fill(255,0,0)
 		}
-		if(m1d==1){
-			greenMeteorSprite(m1x,400)
-		}
-		if(m1d==2){
-			redMeteorSprite(m1x,400)
-		}
-	}
-	if(m2d == dimensionID){
-		meteorSprite(m2x,400)
-	}if(m2d!=dimensionID){
-		if(m2d==0){
-			blueMeteorSprite(m2x,400)
-		}
-		if(m2d==1){
-			greenMeteorSprite(m2x,400)
-		}
-		if(m2d==2){
-			redMeteorSprite(m2x,400)
-		}
-	}
-	if(m3d == dimensionID){
-		meteorSprite(m3x,400)
-	}if(m3d!=dimensionID){
-		if(m3d==0){
-			blueMeteorSprite(m3x,400)
-		}
-		if(m3d==1){
-			greenMeteorSprite(m3x,400)
-		}
-		if(m3d==2){
-			redMeteorSprite(m3x,400)
-		}
-	}
-	
-	dinoSprite(150,dinoY)
-	
-	//dino jump
-	if(jumpDebounce){
-		jumpStage+=1
-		if(jumpStage<=25){
-			dinoY-=5
-		}else{
-			dinoY+=5
-		}
-		if(jumpStage==50){
-			jumpDebounce=false
-			jumpStage=0;
-		}
-	}
-	
-	//allow meteors to glide
-	m1x-=meteorSpeed
-	m2x-=meteorSpeed
-	m3x-=meteorSpeed
-	
-	//meteors respawn at right side of screen
-	
-	if(m1x<=0){
-		m1x=1000
-		m1d = Math.floor(random(0,3))
-	}	if(m2x<=0){
-		m2x=1000
-		m2d = Math.floor(random(0,3))
-	} if(m3x<=0){
-		m3x=1000
-		m3d = Math.floor(random(0,3))
-	}
-	
-	// normal meteors kill dino
-	if(m1d==dimensionID){
-		if(m1x<175&&m1x>125){
-			if(dinoY<425&&dinoY>375){
-				stage=2
-				console.log(stage)
+		rect(500,250,1000,1000);
+
+		//draw sprites and test sprites
+
+		if(m1d == dimensionID){
+			meteorSprite(m1x,400)
+		}if(m1d!=dimensionID){
+			if(m1d==0){
+				blueMeteorSprite(m1x,400)
+			}
+			if(m1d==1){
+				greenMeteorSprite(m1x,400)
+			}
+			if(m1d==2){
+				redMeteorSprite(m1x,400)
 			}
 		}
-	}
-	if(m2d==dimensionID){
-		if(m2x<175&&m2x>125){
-			if(dinoY<425&&dinoY>375){
-				stage=2
-				console.log(stage)
+		if(m2d == dimensionID){
+			meteorSprite(m2x,400)
+		}if(m2d!=dimensionID){
+			if(m2d==0){
+				blueMeteorSprite(m2x,400)
+			}
+			if(m2d==1){
+				greenMeteorSprite(m2x,400)
+			}
+			if(m2d==2){
+				redMeteorSprite(m2x,400)
 			}
 		}
-	}
-	if(m3d==dimensionID){
-		if(m3x<175&&m3x>125){
-			if(dinoY<425&&dinoY>375){
-				stage=2
-				console.log(stage)
+		if(m3d == dimensionID){
+			meteorSprite(m3x,400)
+		}if(m3d!=dimensionID){
+			if(m3d==0){
+				blueMeteorSprite(m3x,400)
+			}
+			if(m3d==1){
+				greenMeteorSprite(m3x,400)
+			}
+			if(m3d==2){
+				redMeteorSprite(m3x,400)
 			}
 		}
+
+		dinoSprite(150,dinoY)
+
+		//dino jump
+		if(jumpDebounce){
+			jumpStage+=1
+			if(jumpStage<=25){
+				dinoY-=5
+			}else{
+				dinoY+=5
+			}
+			if(jumpStage==50){
+				jumpDebounce=false
+				jumpStage=0;
+			}
+		}
+
+		//allow meteors to glide
+		m1x-=meteorSpeed
+		m2x-=meteorSpeed
+		m3x-=meteorSpeed
+
+		//meteors respawn at right side of screen
+
+		if(m1x<=0){
+			m1x=1000
+			m1d = Math.floor(random(0,3))
+		}	if(m2x<=0){
+			m2x=1000
+			m2d = Math.floor(random(0,3))
+		} if(m3x<=0){
+			m3x=1000
+			m3d = Math.floor(random(0,3))
+		}
+
+		// normal meteors kill dino
+		if(m1d==dimensionID){
+			if(m1x<175&&m1x>125){
+				if(dinoY<425&&dinoY>375){
+					stage=2
+					console.log(stage)
+				}
+			}
+		}
+		if(m2d==dimensionID){
+			if(m2x<175&&m2x>125){
+				if(dinoY<425&&dinoY>375){
+					stage=2
+					console.log(stage)
+				}
+			}
+		}
+		if(m3d==dimensionID){
+			if(m3x<175&&m3x>125){
+				if(dinoY<425&&dinoY>375){
+					stage=2
+					console.log(stage)
+				}
+			}
+		}
+		//displayScore
+		fill(0)
+		textSize(25)
+		text(score,100,100)
+		
+		//speed up meteors when point limit hit
+		
+		if(score/1000==meteorMajor){
+			meteorSpeed+=1
+			meteorMajor+=1
+		}
 	}
-	
-	
-	
-	//displayScore
-	fill(0)
-	textSize(25)
-	text(score,100,100)
-	
+	if(stage==2){
+		fill(0)
+		rect(500,250,1000,1000)
+		fill(255)
+		textSize(75)
+		text("Game Over",300,250)
+		textSize(37.5)
+		text("Score: "+str(score),400,400)
+		textSize(15)
+		text("Press s to restart!", 425 ,450)
+	}
+	if(stage==0){
+		fill(0)
+		rect(500,250,1000,1000)
+		fill(255)
+		textSize(75)
+		text("Dino Sub!",300,250)
+		textSize(37.5)
+		text("Press s to start!",350,400)
+	}
 }
 
 function dinoSprite(x,y){ //150, dinoY
@@ -198,6 +223,19 @@ function redMeteorSprite(x,y){
 	circle(x,y,50)
 }
 
+function clearVariables(){
+ 	score = 0
+	m1x = 1000
+	m2x = 4456
+	m3x = 9827
+	meteorSpeed = 5
+	meteorMajor = 1
+	dinoY = 400
+	jumpDebounce = false;
+	jumpStage = 0
+	dimensionID = 1
+	setup()
+}
 
 function keyPressed(){
 	if(key=="w"&&jumpDebounce==false){
@@ -208,5 +246,11 @@ function keyPressed(){
 	}
 	if(key=="d"&&dimensionID<2){
 		dimensionID+=1
+	}
+	if(key=="s"){
+		if(stage==2||stage==0){
+			clearVariables()
+			stage = 1
+		}
 	}
 }
