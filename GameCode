@@ -1,7 +1,12 @@
 var score = 0
 var dead = false
 
-var spawnObstacleMajor = 0
+
+var m1x = 1000
+var m2x = 4456
+var m3x = 9827
+var m1d,m2d,m3d
+
 
 const baseY = 400;
 var dinoY = 400
@@ -9,30 +14,13 @@ var jumpDebounce = false;
 var jumpStage = 0
 var dimensionID = 1
 
-class obstacle {
-	constructor(xPos,dimension){
-		this.x = xPos
-		this.dimension = dimension // 0 - blue, 1 - green, 2 - red
-	}
-}
-
-var m1 = new obstacle()
-m1.x=1000
-m1.dimension = Math.floor(random(0,3))
-var m2 = new obstacle()
-m1.x=9563
-m1.dimension = Math.floor(random(0,3))
-var m3 = new obstacle()
-m1.x=24267
-m1.dimension = Math.floor(random(0,3))
-console.log(m1.dimension)
-
-var obstacles = [m1,m2,m3]
-
 function setup() {
 	createCanvas(1000,500);
 	background(100);
 	rectMode(CENTER);
+	m1d = Math.floor(random(0,3))
+	m2d = Math.floor(random(0,3))
+	m3d = Math.floor(random(0,3))
 }
 
 function draw() {
@@ -50,8 +38,24 @@ function draw() {
 	rect(500,250,1000,1000);
 	
 	//draw sprites and test sprites
+	
+	if(m1d == dimensionID){
+		meteorSprite(m1x,400)
+	}else{
+		if(m1d==0){
+			blueMeteorSprite(m1x,400)
+		}
+		if(m1d==1){
+			greenMeteorSprite(m1x,400)
+		}
+		if(m1d==2){
+			redMeteorSprite(m1x,400)
+		}
+	}
+	
+	meteorSprite(m2x,400)
+	meteorSprite(m3x,400)
 	dinoSprite(150,dinoY)
-	meteorSprite(500,400)
 	
 	//dino jump
 	if(jumpDebounce){
@@ -68,9 +72,9 @@ function draw() {
 	}
 	
 	//allow meteors to glide
-	for(let i=0; i<3; i++){
-		obstacles[i].x+=1
-	}
+	m1x-=5
+	m2x-=5
+	m3x-=5
 }
 
 function dinoSprite(x,y){
@@ -106,6 +110,14 @@ function blueMeteorSprite(x,y){
 function greenMeteorSprite(x,y){
 	fill(0,0,255)                                                 
 	stroke(0,0,255)
+	circle(x,y,65)
+	rect(x+40,y,75,50)
+	rect(x+75,y,75,30)
+	circle(x,y,50)
+}
+function redMeteorSprite(x,y){
+	fill(255,0,0)                                                 
+	stroke(255,0,0)
 	circle(x,y,65)
 	rect(x+40,y,75,50)
 	rect(x+75,y,75,30)
