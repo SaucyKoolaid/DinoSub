@@ -2,9 +2,7 @@ var stage = 0
 var score = 0
 
 
-var m1x = 1000
-var m2x = 4456
-var m3x = 9827
+var m1x,m2x,m3x
 var m1d,m2d,m3d
 var meteorSpeed = 5
 var meteorMajor = 1
@@ -23,6 +21,9 @@ function setup() {
 	m1d = Math.floor(random(0,3))
 	m2d = Math.floor(random(0,3))
 	m3d = Math.floor(random(0,3))
+	m1x = random(1000,1250)
+	m2x = random(4500,5000)
+	m3x = random(9500,11000)
 }
 
 function draw() {
@@ -107,13 +108,13 @@ function draw() {
 		//meteors respawn at right side of screen
 
 		if(m1x<=0){
-			m1x=1000
+			m1x=random(1000,1250)
 			m1d = Math.floor(random(0,3))
 		}	if(m2x<=0){
-			m2x=1000
+			m2x=random(1000,1250)
 			m2d = Math.floor(random(0,3))
 		} if(m3x<=0){
-			m3x=1000
+			m3x=random(1000,1250)
 			m3d = Math.floor(random(0,3))
 		}
 
@@ -251,3 +252,4 @@ function keyPressed(){
 		}
 	}
 }
+
